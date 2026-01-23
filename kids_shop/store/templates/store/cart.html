@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2874f0;
+        }
+        .cart-container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-details h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .cart-item-details p {
+            margin: 5px 0;
+            color: #777;
+        }
+        .empty-message {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+            padding: 40px 0;
+
+
+        }
+
+
+        .remove-btn {
+    color: red;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 8px;
+    display: inline-block;
+
+}
+
+.remove-btn:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+<h1>🛒 Your Cart</h1>
+
+{% if add_to_cart %}
+  <p style="color: green;">{{ product.name }} added to your cart!</p>
+{% endif %}
+
+<div class="cart-container">
+  {% if products %}
+    {% for product in products %}
+      <div class="cart-item">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <div class="cart-item-details">
+          <h3>{{ product.name }}</h3>
+          <p>Price: ₹{{ product.price }}</p>
+          <p>{{ product.description|truncatewords:20 }}</p>
+        </div>
+      </div>
+      <a href="{% url 'remove_from_cart' product.pk %}" class="remove-btn">❌ Remove</a>
+
+    {% endfor %}
+  {% else %}
+    <p class="empty-message">Your cart is empty.</p>
+  {% endif %}
+</div>
+
+</body>
+
+
+
+{% if messages %}
+  <div id="cart-message">
+    {% for message in messages %}
+      <div style="background-color: #d4edda; color: #155724; text-align: center; padding: 10px; font-family: 'Comic Sans MS';">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  <script>
+    setTimeout(() => {
+      const msg = document.getElementById('cart-message');
+      if (msg) msg.style.display = 'none';
+    }, 3000);
+  </script>
+{% endif %}
+</html>

@@ -1,0 +1,152 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        a{
+            text-decoration: none ;
+        }
+   
+/* Overall styling for headings */
+.one {
+    font-size: 28px;
+    color: #1a1a1a;
+    margin: 30px 0 15px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    border-left: 5px solid #ff6f61;
+    padding-left: 15px;
+}
+
+/* Offers section with clean card look */
+.two {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+    background-color: #ffffff;
+    padding: 18px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    white-space: pre-line;
+    font-family: 'Roboto', sans-serif;
+    transition: box-shadow 0.3s ease;
+}
+.two:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Price styling */
+.three {
+    font-size: 26px;
+    color: #e53935;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Product description paragraph */
+.p1 {
+    font-size: 16px;
+    color: #444;
+    background: #fafafa;
+    border-left: 4px solid #2196f3;
+    padding: 14px 18px;
+    border-radius: 8px;
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.03);
+}
+
+  
+  
+
+.action-buttons {
+   
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.add-cart {
+    background-color: #ff9800;
+    color: white;
+    margin: auto;
+}
+
+.add-cart:hover {
+    background-color: #e68900;
+}
+
+.buy-now {
+    background-color: #4CAF50;
+    color: white;
+    margin: auto;
+    
+}
+
+.buy-now:hover {
+    background-color: #449d48;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+    <div class="product-detail">
+        {% if product.pk %}
+<a href="{% url 'product_detail' product.pk %}" class="product-card">
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+    <h1>{{ product.name }}</h1>
+     <h1 class="pri"> ₹{{ product.price }}</h1>
+  
+</a>
+
+   
+  <div class="action-buttons">
+    <a href="{% url 'add_to_cart' product.pk %}" class="btn add-cart">Add to Cart</a>
+
+    <a href="{% url 'buy_now' product.pk %}" class="btn buy-now">⚡ Buy Now</a>
+</div>
+
+
+{% endif %}
+        <h1 class="one">Available offers</h1>
+<p class="two">
+Bank Offer100% Cashback upto 500Rs on Axis Bank SuperMoney Rupay CC UPI transactions on super.money UPIT&C
+
+Bank Offer5% cashback on Flipkart Axis Bank Credit Card upto ₹4,000 per statement quarterT&C
+
+Bank Offer10% instant discount on SBI Credit Card EMI Transactions, up to ₹1,500 on orders of ₹5,000 and aboveT&C
+
+Special PriceGet extra 23% off (price inclusive of cashback/coupon)T&C
+
+Bank Offer10% off on BOBCARD EMI Transactions, up to ₹1,500 on orders of ₹5,000 and aboveT&C
+
+Bank Offer10% off up to ₹1,250 on IDFC FIRST Bank Credit EMI Txns on orders of ₹5,000 and aboveT&C</p>
+        <h1 class="three"><strong>Price:</strong> ₹{{ product.price }}</h1>
+        <p class="p1"><strong>Description:</strong> {{ product.description }}</p>
+   
+
+    </div>
+ 
+</body>
+</html>
